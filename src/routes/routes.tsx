@@ -1,11 +1,11 @@
 import MainLayout from "@/layout/MainLayout";
-import AboutUs from "@/pages/AboutUs";
-import AllProducts from "@/pages/AllProducts";
-import Cart from "@/pages/Cart";
-import Checkout from "@/pages/Checkout";
-import Home from "@/pages/Home";
-import ManageProducts from "@/pages/ManageProducts";
-import SingleProduct from "@/pages/SingleProduct";
+import AboutUs from "@/pages/AboutUs/AboutUs";
+import AllProducts from "@/pages/AllProducts/AllProducts";
+import Cart from "@/pages/Cart/Cart";
+import Checkout from "@/pages/Checkout/Checkout";
+import Home from "@/pages/Home/Home";
+import ManageProducts from "@/pages/ManageProducts/ManageProducts";
+import SingleProduct from "@/pages/SingleProduct/SingleProduct";
 import { createBrowserRouter } from "react-router-dom";
 
 const router = createBrowserRouter([

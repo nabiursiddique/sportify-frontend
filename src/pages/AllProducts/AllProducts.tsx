@@ -1,7 +1,7 @@
 const AllProducts = () => {
   return (
     <div>
-      <h1>This is all products page</h1>
+      <h1>All products page</h1>
     </div>
   );
 };
