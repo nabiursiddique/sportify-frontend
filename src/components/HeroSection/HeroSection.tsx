@@ -26,7 +26,7 @@ const HeroSection = () => {
                 </h1>
                 <h1 className="lg:text-7xl text-4xl font-sans font-extrabold text-white mt-2">
                   <span className="text-lime-400"> Sport Accessories </span>{" "}
-                  With Best Price
+                  With <span className="text-lime-400">10% </span>Discount
                   <br />
                 </h1>
               </div>
