@@ -1,9 +1,10 @@
+import Navbar from "@/pages/Shared/Navbar/Navbar";
 import { Outlet } from "react-router-dom";
 
 const MainLayout = () => {
   return (
     <div>
-      <h1>Navbar</h1>
+      <Navbar />
       <Outlet />
       <h1>Footer</h1>
     </div>
