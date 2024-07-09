@@ -1,7 +1,7 @@
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { Menu as MenuIcon } from "lucide-react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 export default function MobileNav() {
   return (
@@ -12,26 +12,36 @@ export default function MobileNav() {
         </Button>
       </SheetTrigger>
       <div className="md:hidden">
-        <h1 className="text-2xl font-bold text-green-400">Sportify</h1>
+        <h1 className="text-2xl font-bold text-lime-400">Sportify</h1>
       </div>
       <SheetContent side="left">
-        <div className="flex flex-col items-start">
-          <Button variant="link">
-            <Link to={"/"}>Home</Link>
-          </Button>
-          <Button variant="link">
-            <Link to={"/about-us"}>About Us</Link>
-          </Button>
-          <Button variant="link">
-            <Link to={"/all-products"}>All Products</Link>
-          </Button>
-          <Button variant="link">
-            <Link to={"/manage-products"}>Manage Products</Link>
-          </Button>
-          <Button variant="link">
-            <Link to={"/cart"}>Cart</Link>
-          </Button>
-        </div>
+        <nav className="flex flex-col items-start">
+          <NavLink to={"/"}>
+            <Button variant="link" className="hover:text-lime-500">
+              Home
+            </Button>
+          </NavLink>
+          <NavLink to={"/about-us"}>
+            <Button variant="link" className="hover:text-lime-500">
+              About Us
+            </Button>
+          </NavLink>
+          <NavLink to={"/all-products"}>
+            <Button variant="link" className="hover:text-lime-500">
+              All Products
+            </Button>
+          </NavLink>
+          <NavLink to={"/manage-products"}>
+            <Button variant="link" className="hover:text-lime-500">
+              Manage Products
+            </Button>
+          </NavLink>
+          <NavLink to={"/cart"}>
+            <Button variant="link" className="hover:text-lime-500">
+              Cart
+            </Button>
+          </NavLink>
+        </nav>
       </SheetContent>
     </Sheet>
   );

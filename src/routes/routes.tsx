@@ -1,4 +1,4 @@
-import MainLayout from "@/layout/MainLayout";
+import MainLayout from "@/components/layout/MainLayout";
 import AboutUs from "@/pages/AboutUs/AboutUs";
 import AllProducts from "@/pages/AllProducts/AllProducts";
 import Cart from "@/pages/Cart/Cart";
