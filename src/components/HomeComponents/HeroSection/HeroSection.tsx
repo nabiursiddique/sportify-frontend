@@ -5,13 +5,24 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import Autoplay from "embla-carousel-autoplay";
 import sliderImage1 from "@/assets/Carousel_image-01.jpg";
 import sliderImage2 from "@/assets/Carousel_image-02.jpg";
 
 const HeroSection = () => {
   return (
     <div>
-      <Carousel>
+      <Carousel
+        opts={{
+          align: "start",
+          loop: true,
+        }}
+        plugins={[
+          Autoplay({
+            delay: 3000,
+          }),
+        ]}
+      >
         <CarouselContent>
           <CarouselItem>
             <div className="relative w-full lg:h-[100vh] h-[60vh]">
@@ -20,7 +31,7 @@ const HeroSection = () => {
                 style={{ backgroundImage: `url(${sliderImage1})` }}
               ></div>
               <div className="absolute inset-0 bg-black opacity-50"></div>
-              <div className="relative z-10 w-[60%] lg:top-40 top-20 lg:left-14 left-10 flex flex-col items-start lg:ml-7 rounded-lg">
+              <div className="relative z-10 lg:w-[60%] md:w-[80%] lg:top-40 top-20 lg:left-14 left-10 flex flex-col lg:items-start md:items-center lg:ml-7 rounded-lg">
                 <h1 className="lg:text-4xl font-sans font-extrabold text-white">
                   World's Best <br />
                 </h1>
@@ -39,7 +50,7 @@ const HeroSection = () => {
                 style={{ backgroundImage: `url(${sliderImage2})` }}
               ></div>
               <div className="absolute inset-0 bg-black opacity-50"></div>
-              <div className="relative z-10 w-[60%] lg:top-40 top-20 lg:left-14 left-10 flex flex-col items-start lg:ml-7 rounded-lg">
+              <div className="relative z-10 lg:w-[60%] md:w-[80%] lg:top-40 top-20 lg:left-14 left-10 flex flex-col lg:items-start md:items-center lg:ml-7 rounded-lg">
                 <h1 className="lg:text-4xl font-sans font-extrabold text-white">
                   Special Offers <br />
                 </h1>
