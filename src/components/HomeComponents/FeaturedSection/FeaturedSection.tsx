@@ -49,7 +49,7 @@ const FeaturedSection = () => {
   ];
   return (
     <div className="py-10 mx-3">
-      <h1 className="text-5xl py-5 text-center font-extrabold">
+      <h1 className="text-5xl pb-10 pt-5 text-center font-extrabold">
         Latest Products
       </h1>
       <Carousel
@@ -66,8 +66,11 @@ const FeaturedSection = () => {
       >
         <CarouselContent className="-ml-1">
           {products.map((product) => (
-            <CarouselItem className="pl-1 md:basis-1/2 lg:basis-1/3">
-              <div key={product.id} className="p-1">
+            <CarouselItem
+              key={product.id}
+              className="pl-1 md:basis-1/2 lg:basis-1/3"
+            >
+              <div className="p-1">
                 <FeaturedCard product={product} />
               </div>
             </CarouselItem>

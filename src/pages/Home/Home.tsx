@@ -1,3 +1,4 @@
+import Categories from "@/components/HomeComponents/CategoriesSection/Categories";
 import FeaturedSection from "@/components/HomeComponents/FeaturedSection/FeaturedSection";
 import HeroSection from "@/components/HomeComponents/HeroSection/HeroSection";
 
@@ -6,6 +7,7 @@ const Home = () => {
     <div>
       <HeroSection />
       <FeaturedSection />
+      <Categories />
     </div>
   );
 };
