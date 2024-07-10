@@ -1,7 +1,9 @@
+import AboutUsHeader from "@/components/AboutUsComponents/AboutUsHeader";
+
 const AboutUs = () => {
   return (
     <div>
-      <h1>This is about us page</h1>
+      <AboutUsHeader />
     </div>
   );
 };
