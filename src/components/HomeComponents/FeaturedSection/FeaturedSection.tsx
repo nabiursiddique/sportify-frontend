@@ -1,5 +1,4 @@
-import { Button } from "@/components/ui/button";
-import { Card } from "@/components/ui/card";
+import FeaturedCard from "@/components/FeaturedCard/FeaturedCard";
 import {
   Carousel,
   CarouselContent,
@@ -25,8 +24,8 @@ const FeaturedSection = () => {
     },
     {
       id: 2,
-      name: "Product 2",
-      category: "Category ",
+      name: "Racket",
+      category: "Badminton",
       stockQuantity: 10,
       brand: "Brand 1",
       rating: 4.5,
@@ -69,43 +68,7 @@ const FeaturedSection = () => {
           {products.map((product) => (
             <CarouselItem className="pl-1 md:basis-1/2 lg:basis-1/3">
               <div key={product.id} className="p-1">
-                <Card>
-                  <div className=" lg:w-[290px] md:w-[100%] w-[90%]  h-[370.44px] flex flex-col">
-                    <img
-                      src={product.image}
-                      alt={product.name}
-                      className=" h-1/2 rounded-md object-cover "
-                    />
-                    <div className="flex justify-between py-2">
-                      <h2 className="text-2xl font-extrabold">
-                        {product.name}
-                      </h2>
-                    </div>
-                    <p className="text-lg mb-2">{product.description}</p>
-                    <div className="flex justify-between">
-                      <div>
-                        <p className="text-lg font-semibold">
-                          Price: ${product.price}
-                        </p>
-
-                        <p className="text-lg font-semibold">
-                          Stock: {product.stockQuantity}
-                        </p>
-                      </div>
-                      <div>
-                        <p className="text-lg font-semibold">
-                          Brand: {product.brand}
-                        </p>
-                        <p className="text-lg font-semibold">
-                          category: {product.category}
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <Button className="w-full" variant="outline">
-                    View Details
-                  </Button>
-                </Card>
+                <FeaturedCard product={product} />
               </div>
             </CarouselItem>
           ))}
