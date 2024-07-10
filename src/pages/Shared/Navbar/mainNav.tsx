@@ -5,7 +5,7 @@ export default function MainNav() {
   return (
     <div className="mr-4 hidden gap-2 md:flex justify-between items-center w-full">
       <div>
-        <h1 className="text-3xl font-bold text-lime-400">Sportify</h1>
+        <h1 className="text-3xl font-bold text-lime-500">Sportify</h1>
       </div>
       <nav id="navbar" className="flex gap-2">
         <NavLink to={"/"}>
@@ -29,7 +29,7 @@ export default function MainNav() {
           </Button>
         </NavLink>
         <NavLink to={"/cart"}>
-          <Button variant="link" className="hover:text-lime-400">
+          <Button variant="link" className="hover:text-lime-500">
             Cart
           </Button>
         </NavLink>

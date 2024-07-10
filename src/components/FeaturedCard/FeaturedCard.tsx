@@ -19,7 +19,7 @@ const FeaturedCard = ({ product }: { product: TProduct }) => {
         />
       </CardHeader>
       <CardContent className="grid p-4">
-        <p className="text-xl text-lime-400 font-bold">{product?.name}</p>
+        <p className="text-xl text-lime-500 font-bold">{product?.name}</p>
         <CardTitle className="mt-2 text-3xl  font-extrabold">
           {product?.name}
         </CardTitle>

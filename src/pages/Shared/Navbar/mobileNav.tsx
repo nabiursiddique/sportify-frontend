@@ -12,7 +12,7 @@ export default function MobileNav() {
         </Button>
       </SheetTrigger>
       <div className="md:hidden">
-        <h1 className="text-2xl font-bold text-lime-400">Sportify</h1>
+        <h1 className="text-2xl font-bold text-lime-500">Sportify</h1>
       </div>
       <SheetContent side="left">
         <nav className="flex flex-col items-start">
