@@ -7,6 +7,7 @@ import {
   CardTitle,
 } from "../ui/card";
 import { Button } from "../ui/button";
+import { Link } from "react-router-dom";
 
 const FeaturedCard = ({ product }: { product: TProduct }) => {
   return (
@@ -31,9 +32,11 @@ const FeaturedCard = ({ product }: { product: TProduct }) => {
         <p>Price: {product?.price}</p>
       </CardContent>
       <CardFooter className="p-4 border-t border-gray-700">
-        <Button className="w-full bg-lime-500 hover:bg-lime-600">
-          View Details
-        </Button>
+        <Link className="w-full" to={`/product-details/${product?.id}`}>
+          <Button className="w-full bg-lime-500 hover:bg-lime-600">
+            View Details
+          </Button>
+        </Link>
       </CardFooter>
     </Card>
   );

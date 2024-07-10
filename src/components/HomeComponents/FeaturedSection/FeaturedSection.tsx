@@ -49,7 +49,7 @@ const FeaturedSection = () => {
   ];
   return (
     <div className="py-10 mx-3">
-      <h1 className="text-5xl pb-10 pt-5 text-center font-extrabold">
+      <h1 className="text-5xl pb-10 pt-5 text-center font-extrabold text-lime-500">
         Latest Products
       </h1>
       <Carousel

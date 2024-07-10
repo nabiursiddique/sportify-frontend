@@ -48,7 +48,9 @@ const Footer = () => {
 
           <div className="py-8 lg:py-8 lg:pe-16">
             <div className="hidden text-teal-600 lg:block">
-              <h1 className="text-3xl font-bold text-lime-500">Sportify</h1>
+              <h1 className="text-3xl font-extrabold text-lime-400">
+                Sportify
+              </h1>
             </div>
 
             <div className="mt-8 grid grid-cols-1 gap-8 sm:grid-cols-3">

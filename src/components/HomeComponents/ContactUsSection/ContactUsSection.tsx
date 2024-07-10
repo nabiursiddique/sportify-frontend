@@ -5,7 +5,7 @@ const ContactUsSection = () => {
     <div className="flex justify-center my-5">
       <div>
         <div>
-          <h1 className="text-5xl pb-10 pt-5 text-center font-extrabold">
+          <h1 className="text-5xl pb-10 pt-5 text-center font-extrabold text-lime-500">
             Contact Us
           </h1>
         </div>
@@ -60,7 +60,9 @@ const ContactUsSection = () => {
             </div>
           </div>
           <div className="flex justify-center">
-            <Button size="lg">Send</Button>
+            <Button size="lg" className="w-full bg-lime-500 hover:bg-lime-600">
+              Send
+            </Button>
           </div>
         </form>
       </div>

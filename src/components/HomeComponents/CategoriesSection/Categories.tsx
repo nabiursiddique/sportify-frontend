@@ -5,7 +5,7 @@ const Categories = () => {
   const categories = ["Category-01", "Category-02", "Category-03"];
   return (
     <div>
-      <h1 className="text-5xl pt-5 pb-2 text-center font-extrabold">
+      <h1 className="text-5xl pt-5 pb-2 text-center font-extrabold text-lime-500">
         Categories
       </h1>
 
