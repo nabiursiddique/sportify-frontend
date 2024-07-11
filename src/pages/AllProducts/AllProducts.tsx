@@ -1,6 +1,9 @@
 import FeaturedCard from "@/components/FeaturedCard/FeaturedCard";
+import { Input } from "@/components/ui/input";
+import { useState } from "react";
 
 const AllProducts = () => {
+  const [search, setSearch] = useState("");
   const products = [
     {
       id: 1,
@@ -58,11 +61,41 @@ const AllProducts = () => {
         All Products
       </h1>
       <hr />
-      <div className="grid lg:grid-cols-3 md:grid-cols-2 grid-cols-1 gap-5 mt-10">
-        {products.map((product) => (
-          <FeaturedCard product={product} />
-        ))}
-      </div>
+      {/* Search products bar */}
+      <form className="flex lg:justify-end justify-center lg:mr-6">
+        <div className="form-control w-full max-w-xs mt-2">
+          <Input
+            className="border border-lime-500"
+            placeholder="Search Product"
+            onChange={(e) => setSearch(e.target.value.toLowerCase())}
+          />
+        </div>
+      </form>
+      {products.length > 0 ? (
+        <div className="m-6 grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 grid-cols-1 gap-5 my-10">
+          {products
+            .filter((product) => {
+              return search === ""
+                ? product
+                : product?.name.toLowerCase().includes(search);
+            })
+            .map((product, ind) => (
+              <FeaturedCard key={ind} product={product} />
+            ))}
+        </div>
+      ) : (
+        <div className="h-[500px] flex justify-center items-center">
+          <div className="text-center">
+            <h1 className="text-5xl uppercase font-bold  bg-gradient-to-r from-red-600  to-red-400 text-transparent bg-clip-text">
+              Sorry
+            </h1>
+            <h1 className="text-4xl mt-5 uppercase font-bold bg-gradient-to-r from-red-600  to-red-400 text-transparent bg-clip-text">
+              {" "}
+              currently no product is available!
+            </h1>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
