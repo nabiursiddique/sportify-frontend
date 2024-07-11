@@ -5,14 +5,23 @@ export const baseApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "http://localhost:5000/api",
   }),
+  tagTypes: ["Product"],
   endpoints: (builder) => ({
-    getProducts: builder.query({
+    getAllProducts: builder.query({
       query: () => ({
         method: "GET",
         url: "/product",
       }),
+      providesTags: ["Product"],
+    }),
+    getSingleProduct: builder.query({
+      query: (id) => ({
+        method: "GET",
+        url: `/product/${id}`,
+      }),
+      providesTags: ["Product"],
     }),
   }),
 });
 
-export const { useGetProductsQuery } = baseApi;
+export const { useGetAllProductsQuery, useGetSingleProductQuery } = baseApi;

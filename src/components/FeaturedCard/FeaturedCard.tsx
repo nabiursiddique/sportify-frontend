@@ -24,7 +24,9 @@ const FeaturedCard = ({ product }: { product: TProduct }) => {
         <CardTitle className="mt-2 text-3xl  font-extrabold">
           {product?.name}
         </CardTitle>
-        <p className="text-lg mt-4 ">{product?.description}</p>
+        <p className="text-lg mt-4 mb-2">
+          {product?.description.slice(0, 130) + "..."}
+        </p>
         <p>Category: {product?.category}</p>
         <p>Brand: {product?.brand}</p>
         <p>Stock Quantity: {product?.stockQuantity}</p>
@@ -32,7 +34,7 @@ const FeaturedCard = ({ product }: { product: TProduct }) => {
         <p>Price: {product?.price}</p>
       </CardContent>
       <CardFooter className="p-4 border-t border-gray-700">
-        <Link className="w-full" to={`/product-details/${product?.id}`}>
+        <Link className="w-full" to={`/product-details/${product?._id}`}>
           <Button className="w-full bg-lime-500 hover:bg-lime-600">
             View Details
           </Button>

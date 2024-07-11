@@ -1,12 +1,16 @@
 import FeaturedCard from "@/components/FeaturedCard/FeaturedCard";
+import Spinner from "@/components/Spinner/Spinner";
 import { Input } from "@/components/ui/input";
-import { useGetProductsQuery } from "@/redux/api/baseApi";
+import { useGetAllProductsQuery } from "@/redux/api/baseApi";
 import { TProduct } from "@/types";
 import { useState } from "react";
 
 const AllProducts = () => {
   const [search, setSearch] = useState("");
-  const { data: products } = useGetProductsQuery({});
+  const { data: products, isLoading } = useGetAllProductsQuery({});
+  if (isLoading) {
+    return <Spinner />;
+  }
   return (
     <div className="mx-5 my-10">
       <hr />
