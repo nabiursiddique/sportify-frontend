@@ -1,59 +1,12 @@
 import FeaturedCard from "@/components/FeaturedCard/FeaturedCard";
 import { Input } from "@/components/ui/input";
+import { useGetProductsQuery } from "@/redux/api/baseApi";
+import { TProduct } from "@/types";
 import { useState } from "react";
 
 const AllProducts = () => {
   const [search, setSearch] = useState("");
-  const products = [
-    {
-      id: 1,
-      name: "Cricket Bat",
-      category: "Cricket",
-      stockQuantity: 10,
-      brand: "Gray-Nicolls Powerbow",
-      rating: 4.5,
-      description: "This is a very premium bat.",
-      price: 99.99,
-      image:
-        "https://www.gray-nicolls.co.uk/cdn/shop/files/CAIA24English_20Willow_20Bats_20Gem_202.0_20Bat_20Spine_c7eb1bff-c4df-42f7-9e33-1f92efcbcd92.jpg?v=1697124213&width=2600",
-    },
-    {
-      id: 2,
-      name: "Racket",
-      category: "Badminton",
-      stockQuantity: 10,
-      brand: "Brand 1",
-      rating: 4.5,
-      description: "This is a product description.",
-      price: 99.99,
-      image:
-        "https://www.gray-nicolls.co.uk/cdn/shop/files/CAIA24English_20Willow_20Bats_20Gem_202.0_20Bat_20Spine_c7eb1bff-c4df-42f7-9e33-1f92efcbcd92.jpg?v=1697124213&width=2600",
-    },
-    {
-      id: 3,
-      name: "Product 3",
-      category: "Category ",
-      stockQuantity: 10,
-      brand: "Brand 1",
-      rating: 4.5,
-      description: "This is a product description.",
-      price: 99.99,
-      image:
-        "https://www.gray-nicolls.co.uk/cdn/shop/files/CAIA24English_20Willow_20Bats_20Gem_202.0_20Bat_20Spine_c7eb1bff-c4df-42f7-9e33-1f92efcbcd92.jpg?v=1697124213&width=2600",
-    },
-    {
-      id: 4,
-      name: "Product 4",
-      category: "Category ",
-      stockQuantity: 10,
-      brand: "Brand 1",
-      rating: 4.5,
-      description: "This is a product description.",
-      price: 99.99,
-      image:
-        "https://www.gray-nicolls.co.uk/cdn/shop/files/CAIA24English_20Willow_20Bats_20Gem_202.0_20Bat_20Spine_c7eb1bff-c4df-42f7-9e33-1f92efcbcd92.jpg?v=1697124213&width=2600",
-    },
-  ];
+  const { data: products } = useGetProductsQuery({});
   return (
     <div className="mx-5 my-10">
       <hr />
@@ -71,15 +24,16 @@ const AllProducts = () => {
           />
         </div>
       </form>
-      {products.length > 0 ? (
+
+      {products?.data.length > 0 ? (
         <div className="m-6 grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 grid-cols-1 gap-5 my-10">
-          {products
-            .filter((product) => {
+          {products?.data
+            .filter((product: TProduct) => {
               return search === ""
                 ? product
                 : product?.name.toLowerCase().includes(search);
             })
-            .map((product, ind) => (
+            .map((product: TProduct, ind: number) => (
               <FeaturedCard key={ind} product={product} />
             ))}
         </div>
