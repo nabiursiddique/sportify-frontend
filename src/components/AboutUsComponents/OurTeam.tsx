@@ -16,7 +16,7 @@ const OurTeam = () => {
                 className="w-40 h-40 rounded-full mx-auto transition-all duration-500 object-cover border border-solid border-transparent group-hover:border-lime-600"
               />
             </div>
-            <h4 className="text-xl font-semibold text-gray-900 mb-2 capitalize text-center transition-all duration-500 group-hover:text-lime-600">
+            <h4 className="text-xl font-semibold text-gray-900 mb-2 capitalize text-center transition-all duration-500 group-hover:text-lime-400">
               Nabiur Siddique
             </h4>
             <span className="text-gray-500 text-center block transition-all duration-500 group-hover:text-gray-900">
