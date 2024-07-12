@@ -6,16 +6,17 @@ import { SetStateAction, useState } from "react";
 import { Button } from "@/components/ui/button";
 import Rating from "react-rating";
 import { toast } from "sonner";
-import Spinner from "@/components/Spinner/Spinner";
 
 const ManageProducts = () => {
   const [ratingValue, setRatingValue] = useState(0);
 
   const [createProduct, { isLoading, isSuccess }] = useCreateProductMutation();
+
   const handleSubmit = (e: any) => {
     e.preventDefault();
     const { name, category, stockQuantity, brand, image, price, description } =
       e.target.elements;
+
     const formData = {
       name: name.value,
       category: category.value,
@@ -31,7 +32,7 @@ const ManageProducts = () => {
 
     //todo: isLoading and isSuccess is not working
     if (isLoading) {
-      return <Spinner />;
+      toast.loading("Adding Product");
     }
 
     if (isSuccess) {
@@ -136,7 +137,6 @@ const ManageProducts = () => {
 
             <Button
               type="submit"
-              variant="outline"
               className="px-4 py-2 w-full bg-lime-400 text-white  rounded-md hover:scale-95 transition-all mt-10 hover:bg-lime-600"
             >
               Submit

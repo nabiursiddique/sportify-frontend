@@ -69,10 +69,10 @@ const Cart = () => {
                 <span className="font-semibold">$21.98</span>
               </div>
               <Button
-                className="w-full bg-lime-700 hover:bg-lime-600"
+                className="w-full hover:scale-95 transition-all bg-lime-700 hover:bg-lime-600"
                 size={"lg"}
               >
-                Add to Cart
+                Checkout
               </Button>
             </div>
           </div>
