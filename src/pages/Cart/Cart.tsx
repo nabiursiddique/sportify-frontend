@@ -1,9 +1,26 @@
 import { Button } from "@/components/ui/button";
-import { useAppSelector } from "@/redux/hooks";
+import { increaseProductQuantityInCart } from "@/redux/features/cartSlice/cartSlice";
+import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { toast } from "sonner";
 
 const Cart = () => {
+  const dispatch = useAppDispatch();
+
   const cart = useAppSelector((state) => state.cart.products) || [];
-  console.log(cart);
+
+  const handleIncreaseQuantity = (id: string) => {
+    const product = cart.find((item) => item.id === id);
+    if (
+      product &&
+      product.stockQuantity > 0 &&
+      product.quantity < product.stockQuantity
+    ) {
+      dispatch(increaseProductQuantityInCart({ id, quantity: 1 }));
+    } else {
+      toast.warning("No more stock available");
+    }
+  };
+
   return (
     <div className="bg-gray-100 h-screen py-8">
       <div className="container mx-auto px-4">
@@ -45,7 +62,10 @@ const Cart = () => {
                           <span className="text-center w-8">
                             {product?.quantity}
                           </span>
-                          <button className="border rounded-md py-2 px-4 ml-2">
+                          <button
+                            onClick={() => handleIncreaseQuantity(product.id)}
+                            className="border rounded-md py-2 px-4 ml-2"
+                          >
                             +
                           </button>
                         </div>
@@ -56,7 +76,6 @@ const Cart = () => {
                       </td>
                     </tr>
                   ))}
-                  {/* More product rows */}
                 </tbody>
               </table>
             </div>
