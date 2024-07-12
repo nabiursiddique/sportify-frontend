@@ -1,5 +1,6 @@
 import Spinner from "@/components/Spinner/Spinner";
 import { Button } from "@/components/ui/button";
+import renderStars from "@/helpers/renderStarts";
 import { useGetSingleProductQuery } from "@/redux/api/baseApi";
 import { useParams } from "react-router-dom";
 
@@ -57,10 +58,10 @@ const SingleProduct = () => {
                   <span className="font-bold text-white">Category:</span>
                   <span className="text-white"> {product?.data?.category}</span>
                 </div>
-                <div className="mr-4">
+                <div className="mr-4 flex gap-2 items-center">
                   <span className="font-bold text-white">Rating:</span>
-                  <span className="text-white">
-                    {" " + product?.data?.rating}
+                  <span className="text-white flex">
+                    {renderStars(product?.data?.rating)}
                   </span>
                 </div>
               </div>
