@@ -33,6 +33,24 @@ const Cart = () => {
     }
   };
 
+  // calculate subtotal
+  const calculateSubtotal = () => {
+    return cart.reduce(
+      (total, product) => total + product.price * product.quantity,
+      0
+    );
+  };
+
+  // calculate tax based on subtotal
+  const calculateTax = (subtotal: number) => {
+    return subtotal * 0.15;
+  };
+
+  // calculating total price after tax and subtotal
+  const subtotal = calculateSubtotal();
+  const tax = calculateTax(subtotal);
+  const total = subtotal + tax;
+
   return (
     <div className="bg-gray-100 h-screen py-8">
       <div className="container mx-auto px-4">
@@ -100,20 +118,16 @@ const Cart = () => {
               <h2 className="text-lg font-semibold mb-4">Summary</h2>
               <div className="flex justify-between mb-2">
                 <span>Subtotal</span>
-                <span>$19.99</span>
+                <span>৳{subtotal}</span>
               </div>
               <div className="flex justify-between mb-2">
                 <span>Taxes</span>
-                <span>$1.99</span>
-              </div>
-              <div className="flex justify-between mb-2">
-                <span>Shipping</span>
-                <span>$0.00</span>
+                <span>৳{tax}</span>
               </div>
               <hr className="my-2" />
               <div className="flex justify-between mb-2">
                 <span className="font-semibold">Total</span>
-                <span className="font-semibold">$21.98</span>
+                <span className="font-semibold">৳{total}</span>
               </div>
               <Button
                 className="w-full hover:scale-95 transition-all bg-lime-700 hover:bg-lime-600"
