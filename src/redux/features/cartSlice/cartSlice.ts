@@ -6,6 +6,7 @@ type TCartProduct = {
   price: number;
   quantity: number;
   stockQuantity: number;
+  image: string;
 };
 
 type TCartState = {

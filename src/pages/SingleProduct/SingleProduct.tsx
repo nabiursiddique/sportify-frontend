@@ -38,6 +38,7 @@ const SingleProduct = () => {
           price: product?.data.price,
           quantity: 1,
           stockQuantity: product?.data.stockQuantity,
+          image: product?.data.image,
         })
       );
       setCurrentStock(currentStock - 1);

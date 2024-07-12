@@ -1,6 +1,9 @@
 import { Button } from "@/components/ui/button";
+import { useAppSelector } from "@/redux/hooks";
 
 const Cart = () => {
+  const cart = useAppSelector((state) => state.cart.products) || [];
+  console.log(cart);
   return (
     <div className="bg-gray-100 h-screen py-8">
       <div className="container mx-auto px-4">
@@ -18,31 +21,41 @@ const Cart = () => {
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td className="py-4">
-                      <div className="flex items-center">
-                        <img
-                          className="h-16 w-16 mr-4"
-                          src="https://via.placeholder.com/150"
-                          alt="Product image"
-                        />
-                        <span className="font-semibold">Product name</span>
-                      </div>
-                    </td>
-                    <td className="py-4">$19.99</td>
-                    <td className="py-4">
-                      <div className="flex items-center">
-                        <button className="border rounded-md py-2 px-4 mr-2">
-                          -
-                        </button>
-                        <span className="text-center w-8">1</span>
-                        <button className="border rounded-md py-2 px-4 ml-2">
-                          +
-                        </button>
-                      </div>
-                    </td>
-                    <td className="py-4">$19.99</td>
-                  </tr>
+                  {cart.map((product) => (
+                    <tr>
+                      <td className="py-4">
+                        <div className="flex items-center">
+                          <img
+                            className="h-16 w-16 mr-4"
+                            src={product?.image}
+                            alt="Product image"
+                          />
+                          <span className="font-semibold">{product?.name}</span>
+                        </div>
+                      </td>
+                      <td className="py-4">
+                        <span className="font-bold text-2xl">৳</span>
+                        {product?.price}
+                      </td>
+                      <td className="py-4">
+                        <div className="flex items-center">
+                          <button className="border rounded-md py-2 px-4 mr-2">
+                            -
+                          </button>
+                          <span className="text-center w-8">
+                            {product?.quantity}
+                          </span>
+                          <button className="border rounded-md py-2 px-4 ml-2">
+                            +
+                          </button>
+                        </div>
+                      </td>
+                      <td className="py-4">
+                        <span className="font-bold text-2xl">৳</span>
+                        {product?.quantity * product?.price}
+                      </td>
+                    </tr>
+                  ))}
                   {/* More product rows */}
                 </tbody>
               </table>
