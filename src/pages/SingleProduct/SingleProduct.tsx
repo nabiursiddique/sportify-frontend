@@ -27,7 +27,6 @@ const SingleProduct = () => {
     return <Spinner />;
   }
 
-  // todo: product is not adding
   // Handling add to cart
   const handleAddToCart = () => {
     if (currentStock > 0) {

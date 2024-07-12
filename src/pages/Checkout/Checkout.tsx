@@ -1,4 +1,6 @@
 import { Button } from "@/components/ui/button";
+import { removeAllProductsFromCart } from "@/redux/features/cartSlice/cartSlice";
+import { useAppDispatch } from "@/redux/hooks";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
 import { toast } from "sonner";
@@ -6,6 +8,7 @@ import { toast } from "sonner";
 const Checkout = () => {
   const location = useLocation();
   const initialTotal = location.state?.total || 0;
+  const dispatch = useAppDispatch();
 
   const [total, setTotal] = useState(initialTotal);
 
@@ -13,6 +16,7 @@ const Checkout = () => {
     e.preventDefault();
     toast.success("Thanks For Ordering");
     setTotal(0);
+    dispatch(removeAllProductsFromCart());
   };
 
   return (
@@ -96,15 +100,6 @@ const Checkout = () => {
                 <div>
                   <input
                     type="radio"
-                    id="stripe"
-                    name="stripe"
-                    value="paymentMethod"
-                  />
-                  <label className="mx-2">Stripe Payment</label>
-                </div>
-                <div>
-                  <input
-                    type="radio"
                     id="cashOnDelivery"
                     name="cashOnDelivery"
                     value="paymentMethod"
@@ -117,6 +112,7 @@ const Checkout = () => {
               <Button
                 size="lg"
                 className="w-full hover:scale-95 transition-all bg-lime-500 hover:bg-lime-600"
+                disabled={total === 0}
               >
                 Submit
               </Button>
