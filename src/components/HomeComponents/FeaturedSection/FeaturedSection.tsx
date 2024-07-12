@@ -16,7 +16,7 @@ const FeaturedSection = () => {
   if (isLoading) {
     return <Spinner />;
   }
-  const products = data?.data?.slice(0, 3);
+  const products = data?.data?.slice(0, 5);
   return (
     <div className="py-10 mx-3">
       <h1 className="text-5xl pb-10 pt-5 text-center font-extrabold text-lime-500">
