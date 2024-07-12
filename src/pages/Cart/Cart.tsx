@@ -1,5 +1,8 @@
 import { Button } from "@/components/ui/button";
-import { increaseProductQuantityInCart } from "@/redux/features/cartSlice/cartSlice";
+import {
+  decreaseProductQuantityInCart,
+  increaseProductQuantityInCart,
+} from "@/redux/features/cartSlice/cartSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
 import { toast } from "sonner";
 
@@ -8,6 +11,7 @@ const Cart = () => {
 
   const cart = useAppSelector((state) => state.cart.products) || [];
 
+  // increasing product quantity until the product is available
   const handleIncreaseQuantity = (id: string) => {
     const product = cart.find((item) => item.id === id);
     if (
@@ -18,6 +22,14 @@ const Cart = () => {
       dispatch(increaseProductQuantityInCart({ id, quantity: 1 }));
     } else {
       toast.warning("No more stock available");
+    }
+  };
+
+  // decrease product quantity
+  const handleDecreaseQuantity = (id: string) => {
+    const product = cart.find((item) => item.id === id);
+    if (product && product.quantity > 1) {
+      dispatch(decreaseProductQuantityInCart({ id, quantity: 1 }));
     }
   };
 
@@ -56,7 +68,10 @@ const Cart = () => {
                       </td>
                       <td className="py-4">
                         <div className="flex items-center">
-                          <button className="border rounded-md py-2 px-4 mr-2">
+                          <button
+                            onClick={() => handleDecreaseQuantity(product.id)}
+                            className="border rounded-md py-2 px-4 mr-2"
+                          >
                             -
                           </button>
                           <span className="text-center w-8">
