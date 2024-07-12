@@ -64,7 +64,7 @@ const Cart = () => {
     if (isOutOfStock) {
       toast.warning("Some items in your cart are out of stock.");
     } else {
-      navigate("/checkout");
+      navigate("/checkout", { state: { total } });
     }
   };
 
