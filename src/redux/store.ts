@@ -1,11 +1,11 @@
 import { configureStore } from "@reduxjs/toolkit";
-import counterReducer from "./features/counter/counterSlice";
 import { baseApi } from "./api/baseApi";
+import cartReducer from "./features/cartSlice/cartSlice";
 
 export const store = configureStore({
   reducer: {
-    counter: counterReducer,
     [baseApi.reducerPath]: baseApi.reducer,
+    cart: cartReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware().concat(baseApi.middleware),

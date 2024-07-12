@@ -2,14 +2,51 @@ import Spinner from "@/components/Spinner/Spinner";
 import { Button } from "@/components/ui/button";
 import renderStars from "@/helpers/renderStarts";
 import { useGetSingleProductQuery } from "@/redux/api/baseApi";
+import { addProductToCart } from "@/redux/features/cartSlice/cartSlice";
+import { useAppDispatch } from "@/redux/hooks";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import { toast } from "sonner";
 
 const SingleProduct = () => {
+  const [currentStock, setCurrentStock] = useState(0);
+
+  const dispatch = useAppDispatch();
+
   const { id } = useParams();
   const { data: product, isLoading } = useGetSingleProductQuery(id);
+
+  // setting the product quantity for reducing
+  useEffect(() => {
+    if (product) {
+      setCurrentStock(product?.data?.stockQuantity);
+    }
+  }, [product]);
+
   if (isLoading) {
     return <Spinner />;
   }
+
+  // todo: product is not adding
+  // Handling add to cart
+  const handleAddToCart = () => {
+    if (currentStock > 0) {
+      dispatch(
+        addProductToCart({
+          id: id,
+          name: product?.data.name,
+          price: product?.data.price,
+          quantity: 1,
+          stockQuantity: product?.data.stockQuantity,
+        })
+      );
+      setCurrentStock(currentStock - 1);
+      toast.success("Product added to cart");
+    } else {
+      toast.warning("Not enough stock");
+    }
+  };
+
   return (
     <div className="my-10 mx-10">
       <div className="bg-lime-400 py-8 ">
@@ -26,6 +63,7 @@ const SingleProduct = () => {
               <div className="flex -mx-2 mb-4">
                 <div className="w-full px-2">
                   <Button
+                    onClick={handleAddToCart}
                     className="w-full bg-lime-700 hover:bg-lime-600"
                     size={"lg"}
                   >
