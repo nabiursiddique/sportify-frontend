@@ -2,7 +2,7 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { useCreateProductMutation } from "@/redux/api/baseApi";
 import { Star } from "lucide-react";
-import { SetStateAction, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import Rating from "react-rating";
 import { toast } from "sonner";
@@ -29,16 +29,19 @@ const ManageProducts = () => {
     };
 
     createProduct(formData);
+  };
 
-    //todo: isLoading and isSuccess is not working
+  useEffect(() => {
     if (isLoading) {
       toast.loading("Adding Product");
     }
 
     if (isSuccess) {
+      toast.dismiss();
       toast.success("Product Added Successfully");
     }
-  };
+  }, [isLoading, isSuccess]);
+
   return (
     <div>
       <Card>
