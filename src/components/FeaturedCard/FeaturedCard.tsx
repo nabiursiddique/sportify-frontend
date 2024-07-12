@@ -25,7 +25,7 @@ const FeaturedCard = ({ product }: { product: TProduct }) => {
           {product?.name}
         </CardTitle>
         <p className="text-lg mt-4 mb-2">
-          {product?.description.slice(0, 130) + "..."}
+          {product?.description.slice(0, 100) + "..."}
         </p>
         <p>Category: {product?.category}</p>
         <p>Brand: {product?.brand}</p>
