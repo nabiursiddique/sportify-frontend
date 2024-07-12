@@ -2,12 +2,15 @@ import { Button } from "@/components/ui/button";
 import {
   decreaseProductQuantityInCart,
   increaseProductQuantityInCart,
+  removeProductFromCart,
 } from "@/redux/features/cartSlice/cartSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
 const Cart = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const cart = useAppSelector((state) => state.cart.products) || [];
 
@@ -51,6 +54,20 @@ const Cart = () => {
   const tax = calculateTax(subtotal);
   const total = subtotal + tax;
 
+  // cannot checkout if not in stock
+  const isOutOfStock = cart.some(
+    (product) => product.quantity > product.stockQuantity
+  );
+
+  // checkout function
+  const handleCheckout = () => {
+    if (isOutOfStock) {
+      toast.warning("Some items in your cart are out of stock.");
+    } else {
+      navigate("/checkout");
+    }
+  };
+
   return (
     <div className="bg-gray-100 h-screen py-8">
       <div className="container mx-auto px-4">
@@ -58,59 +75,77 @@ const Cart = () => {
         <div className="flex flex-col md:flex-row gap-4">
           <div className="md:w-3/4">
             <div className="bg-white rounded-lg shadow-md p-6 mb-4">
-              <table className="w-full">
-                <thead>
-                  <tr>
-                    <th className="text-left font-semibold">Product</th>
-                    <th className="text-left font-semibold">Price</th>
-                    <th className="text-left font-semibold">Quantity</th>
-                    <th className="text-left font-semibold">Total</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {cart.map((product) => (
+              {cart.length > 0 ? (
+                <table className="w-full">
+                  <thead>
                     <tr>
-                      <td className="py-4">
-                        <div className="flex items-center">
-                          <img
-                            className="h-16 w-16 mr-4"
-                            src={product?.image}
-                            alt="Product image"
-                          />
-                          <span className="font-semibold">{product?.name}</span>
-                        </div>
-                      </td>
-                      <td className="py-4">
-                        <span className="font-bold text-2xl">৳</span>
-                        {product?.price}
-                      </td>
-                      <td className="py-4">
-                        <div className="flex items-center">
-                          <button
-                            onClick={() => handleDecreaseQuantity(product.id)}
-                            className="border rounded-md py-2 px-4 mr-2"
-                          >
-                            -
-                          </button>
-                          <span className="text-center w-8">
-                            {product?.quantity}
-                          </span>
-                          <button
-                            onClick={() => handleIncreaseQuantity(product.id)}
-                            className="border rounded-md py-2 px-4 ml-2"
-                          >
-                            +
-                          </button>
-                        </div>
-                      </td>
-                      <td className="py-4">
-                        <span className="font-bold text-2xl">৳</span>
-                        {product?.quantity * product?.price}
-                      </td>
+                      <th className="text-left font-semibold">Product</th>
+                      <th className="text-left font-semibold">Price</th>
+                      <th className="text-left font-semibold">Quantity</th>
+                      <th className="text-left font-semibold">Total</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {cart.map((product, ind) => (
+                      <tr key={ind}>
+                        <td className="py-4">
+                          <div className="flex items-center">
+                            <img
+                              className="h-16 w-16 mr-4"
+                              src={product?.image}
+                              alt="Product image"
+                            />
+                            <span className="font-semibold">
+                              {product?.name}
+                            </span>
+                          </div>
+                        </td>
+                        <td className="py-4">
+                          <span className="font-bold text-2xl">৳</span>
+                          {product?.price}
+                        </td>
+                        <td className="py-4">
+                          <div className="flex items-center">
+                            <button
+                              onClick={() => handleDecreaseQuantity(product.id)}
+                              className="border rounded-md py-2 px-4 mr-2"
+                            >
+                              -
+                            </button>
+                            <span className="text-center w-8">
+                              {product?.quantity}
+                            </span>
+                            <button
+                              onClick={() => handleIncreaseQuantity(product.id)}
+                              className="border rounded-md py-2 px-4 ml-2"
+                            >
+                              +
+                            </button>
+                          </div>
+                        </td>
+                        <td className="py-4">
+                          <span className="font-bold text-2xl">৳</span>
+                          {product?.quantity * product?.price}
+                        </td>
+                        <td>
+                          <Button
+                            onClick={() =>
+                              dispatch(removeProductFromCart(product.id))
+                            }
+                            className="bg-red-500 hover:bg-red-600 hover:scale-95 transition-all"
+                          >
+                            X
+                          </Button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              ) : (
+                <h1 className="text-center lg:text-3xl text-2xl font-bold">
+                  Your Cart is Empty
+                </h1>
+              )}
             </div>
           </div>
           <div className="md:w-1/4">
@@ -132,6 +167,8 @@ const Cart = () => {
               <Button
                 className="w-full hover:scale-95 transition-all bg-lime-700 hover:bg-lime-600"
                 size={"lg"}
+                onClick={handleCheckout}
+                disabled={isOutOfStock || total <= 0}
               >
                 Checkout
               </Button>
