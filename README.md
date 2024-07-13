@@ -1,31 +1,30 @@
-# React + TypeScript + Vite
+# Sportify Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This website is for selling and buying Sport Products. This website backend system is build using NodeJS, ExpressJS, MongoDB, and Mongoose. And Frontend is build with React, Typescript, Redux and RTK Query. For designing we have used tailwind css and one of its library shadcn ui. In this website user can add Product into cart and checkout, can add product in the store with add product form, user will be able to update product and delete product from manage product section. In all product page user can filter products based on there needs.
 
-Currently, two official plugins are available:
+Routes:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- /
+- /about-us
+- /all-products
+- /product-details/:id
+- /cart
+- /checkout
+- /manage-products/add-product
+- /manage-products/edit-product
+- /manage-products/edit-product-info/:id
 
-## Expanding the ESLint configuration
+## To Run The Project
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+To run the project in your device _clone_ the project and then run the following commands
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+```shell
+npm install
+npm run dev
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
-# sportify-frontend
+For checking the es linting run the below command
+
+```shell
+npm run lint
+```
