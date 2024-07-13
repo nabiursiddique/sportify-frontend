@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Star } from "lucide-react";
-import { SetStateAction, useState } from "react";
+import { SetStateAction, useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import Rating from "react-rating";
 import {
@@ -10,22 +10,24 @@ import {
 } from "@/redux/api/baseApi";
 import { useParams } from "react-router-dom";
 import Spinner from "@/components/Spinner/Spinner";
+import { toast } from "sonner";
 
 const EditProductInfo = () => {
-  const [ratingValue, setRatingValue] = useState(0);
-
+  // getting the id from params
   const { id } = useParams();
 
   // getting the single product data
-  const { data: product, isLoading } = useGetSingleProductQuery(id);
+  const { data: product, isLoading, refetch } = useGetSingleProductQuery(id);
   const productData = product?.data;
 
   //  for updating the info into the db
-  const [updateSingleProduct] = useUpdateSingleProductMutation();
+  const [
+    updateSingleProduct,
+    { isSuccess, isLoading: updateLoading, isError },
+  ] = useUpdateSingleProductMutation();
 
-  if (isLoading) {
-    return <Spinner />;
-  }
+  // state for setting the previous rating and new rating
+  const [ratingValue, setRatingValue] = useState(productData?.rating);
 
   const handleSubmit = (e: any) => {
     e.preventDefault();
@@ -48,6 +50,19 @@ const EditProductInfo = () => {
     };
     updateSingleProduct(updatedData);
   };
+
+  useEffect(() => {
+    if (isSuccess) {
+      toast.success("Product updated successfully!");
+    } else if (isError) {
+      toast.error("Failed to update the product!");
+    }
+  }, [isSuccess, isError, refetch]);
+
+  if (isLoading || updateLoading) {
+    return <Spinner />;
+  }
+
   return (
     <div>
       <Card>
