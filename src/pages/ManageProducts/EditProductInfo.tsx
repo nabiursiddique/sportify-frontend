@@ -4,7 +4,10 @@ import { Star } from "lucide-react";
 import { SetStateAction, useState } from "react";
 import { Button } from "@/components/ui/button";
 import Rating from "react-rating";
-import { useGetSingleProductQuery } from "@/redux/api/baseApi";
+import {
+  useGetSingleProductQuery,
+  useUpdateSingleProductMutation,
+} from "@/redux/api/baseApi";
 import { useParams } from "react-router-dom";
 import Spinner from "@/components/Spinner/Spinner";
 
@@ -12,8 +15,13 @@ const EditProductInfo = () => {
   const [ratingValue, setRatingValue] = useState(0);
 
   const { id } = useParams();
+
+  // getting the single product data
   const { data: product, isLoading } = useGetSingleProductQuery(id);
   const productData = product?.data;
+
+  //  for updating the info into the db
+  const [updateSingleProduct] = useUpdateSingleProductMutation();
 
   if (isLoading) {
     return <Spinner />;
@@ -34,6 +42,11 @@ const EditProductInfo = () => {
       price: price.value,
       description: description.value,
     };
+    const updatedData = {
+      id: id,
+      data: formData,
+    };
+    updateSingleProduct(updatedData);
   };
   return (
     <div>

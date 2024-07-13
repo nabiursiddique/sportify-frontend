@@ -7,6 +7,15 @@ export const baseApi = createApi({
   }),
   tagTypes: ["Product"],
   endpoints: (builder) => ({
+    createProduct: builder.mutation({
+      query: (newProduct) => ({
+        method: "POST",
+        url: "/product",
+        body: newProduct,
+      }),
+      // Cache invalidation after mutation
+      invalidatesTags: ["Product"],
+    }),
     getAllProducts: builder.query({
       query: () => ({
         method: "GET",
@@ -21,19 +30,19 @@ export const baseApi = createApi({
       }),
       providesTags: ["Product"],
     }),
-    createProduct: builder.mutation({
-      query: (newProduct) => ({
-        method: "POST",
-        url: "/product",
-        body: newProduct,
-      }),
-      // Cache invalidation after mutation
-      invalidatesTags: ["Product"],
-    }),
     deleteProduct: builder.mutation({
       query: (id) => ({
         method: "DELETE",
         url: `/product/${id}`,
+      }),
+      // Cache invalidation after mutation
+      invalidatesTags: ["Product"],
+    }),
+    updateSingleProduct: builder.mutation({
+      query: (updatedProduct) => ({
+        method: "PATCH",
+        url: `/product/${updatedProduct.id}`,
+        body: updatedProduct.data,
       }),
       // Cache invalidation after mutation
       invalidatesTags: ["Product"],
@@ -46,4 +55,5 @@ export const {
   useGetSingleProductQuery,
   useCreateProductMutation,
   useDeleteProductMutation,
+  useUpdateSingleProductMutation,
 } = baseApi;
