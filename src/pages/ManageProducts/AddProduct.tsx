@@ -63,6 +63,12 @@ const AddProduct = () => {
             className="p-6 border border-gray-300 rounded-md"
           >
             <div className="grid gap-2 mb-4">
+              <label
+                htmlFor="productName"
+                className="text-lime-500 font-extrabold"
+              >
+                Product Name
+              </label>
               <input
                 id="name"
                 type="text"
@@ -72,6 +78,12 @@ const AddProduct = () => {
               />
             </div>
             <div className="grid gap-2 mb-4">
+              <label
+                htmlFor="productCategory"
+                className="text-lime-500 font-extrabold"
+              >
+                Product Category
+              </label>
               <input
                 id="category"
                 type="text"
@@ -81,6 +93,12 @@ const AddProduct = () => {
               />
             </div>
             <div className="grid gap-2 mb-4">
+              <label
+                htmlFor="stockQuantity"
+                className="text-lime-500 font-extrabold"
+              >
+                Stock Quantity
+              </label>
               <input
                 id="stockQuantity"
                 type="number"
@@ -91,6 +109,9 @@ const AddProduct = () => {
             </div>
             <div>
               <div className="grid gap-2 mb-4">
+                <label htmlFor="brand" className="text-lime-500 font-extrabold">
+                  Product Brand
+                </label>
                 <input
                   id="brand"
                   type="text"
@@ -100,6 +121,12 @@ const AddProduct = () => {
                 />
               </div>
               <div className="grid gap-2 mb-4">
+                <label
+                  htmlFor="productPrice"
+                  className="text-lime-500 font-extrabold"
+                >
+                  Product Price
+                </label>
                 <input
                   id="price"
                   type="number"
@@ -109,6 +136,12 @@ const AddProduct = () => {
                 />
               </div>
               <div className="grid gap-2 mb-4">
+                <label
+                  htmlFor="productImageURL"
+                  className="text-lime-500 font-extrabold"
+                >
+                  Product Image URL
+                </label>
                 <input
                   id="image"
                   type="text"
@@ -119,23 +152,39 @@ const AddProduct = () => {
                 />
               </div>
 
-              {/* @ts-expect-error their is no type declaration file for react rating*/}
-              <Rating
-                emptySymbol={<Star size={40} color="orange" />}
-                fullSymbol={<Star size={40} color="orange" fill="orange" />}
-                fractions={2}
-                initialRating={ratingValue}
-                stop={5}
-                onClick={(value: SetStateAction<number>) =>
-                  setRatingValue(value)
-                }
-              />
+              <div>
+                <label
+                  htmlFor="name"
+                  className="text-lime-500 font-extrabold block"
+                >
+                  Product Rating
+                </label>
+                {/* @ts-expect-error their is no type declaration file for react rating*/}
+                <Rating
+                  emptySymbol={<Star size={40} color="orange" />}
+                  fullSymbol={<Star size={40} color="orange" fill="orange" />}
+                  fractions={2}
+                  initialRating={ratingValue}
+                  stop={5}
+                  onClick={(value: SetStateAction<number>) =>
+                    setRatingValue(value)
+                  }
+                />
+              </div>
 
-              <textarea
-                id="description"
-                className="resize-y rounded-md border border-gray-400 w-full lg:h-40 h-20 p-2 mt-2"
-                placeholder="Product Description"
-              ></textarea>
+              <div>
+                <label
+                  htmlFor="productDescription"
+                  className="text-lime-500 font-extrabold"
+                >
+                  Product Description
+                </label>
+                <textarea
+                  id="description"
+                  className="resize-y rounded-md border border-gray-400 w-full lg:h-40 h-20 p-2 mt-2"
+                  placeholder="Product Description"
+                ></textarea>
+              </div>
             </div>
 
             <Button
