@@ -14,7 +14,7 @@ import {
 import { useGetAllProductsQuery } from "@/redux/api/baseApi";
 import { TProduct } from "@/types";
 import { Filter } from "lucide-react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 
 const AllProducts = () => {
@@ -22,17 +22,36 @@ const AllProducts = () => {
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
   const [category, setCategory] = useState(queryParams.get("category") || "");
+  const [products, setProducts] = useState<TProduct[]>([]);
 
-  const { data: products, isLoading } = useGetAllProductsQuery({ category });
+  const { data, isLoading, refetch } = useGetAllProductsQuery({ category });
+
+  useEffect(() => {
+    if (data && data.data) {
+      setProducts(data.data);
+    }
+    refetch();
+  }, [data, refetch]);
 
   // handling category filter
   const handleCategory = (category: string) => {
     setCategory(category);
   };
 
+  // handling removing all filters
+  const handleRemoveFilters = () => {
+    if (data && data.data) {
+      setProducts(data.data);
+    }
+    setCategory("");
+    refetch();
+  };
+
+  // If data is not loaded
   if (isLoading) {
     return <Spinner />;
   }
+
   return (
     <div className="mx-5 my-10">
       <hr />
@@ -85,7 +104,12 @@ const AllProducts = () => {
 
               <SheetFooter>
                 <SheetClose asChild>
-                  <Button type="submit" variant={"custom"} className="mt-5">
+                  <Button
+                    onClick={handleRemoveFilters}
+                    type="submit"
+                    variant={"custom"}
+                    className="mt-5"
+                  >
                     Clear Filter
                   </Button>
                 </SheetClose>
@@ -102,9 +126,9 @@ const AllProducts = () => {
         </div>
       </form>
 
-      {products?.data.length > 0 ? (
+      {products.length > 0 ? (
         <div className="m-6 grid lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1 grid-cols-1 gap-5 my-10">
-          {products?.data
+          {products
             .filter((product: TProduct) => {
               return search === ""
                 ? product
