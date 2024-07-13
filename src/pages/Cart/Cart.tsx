@@ -51,7 +51,7 @@ const Cart = () => {
 
   // calculating total price after tax and subtotal
   const subtotal = calculateSubtotal();
-  const tax = calculateTax(subtotal);
+  const tax = Math.round(calculateTax(subtotal));
   const total = subtotal + tax;
 
   // cannot checkout if not in stock

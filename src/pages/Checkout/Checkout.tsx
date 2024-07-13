@@ -7,9 +7,11 @@ import {
   removeProductFromCart,
 } from "@/redux/features/cartSlice/cartSlice";
 import { useAppDispatch, useAppSelector } from "@/redux/hooks";
+import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
 const Checkout = () => {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   const cart = useAppSelector((state) => state.cart.products) || [];
@@ -74,6 +76,8 @@ const Checkout = () => {
 
       toast.success("Thanks For Ordering");
       dispatch(removeAllProductsFromCart());
+      // navigating to home page after placing order
+      navigate("/");
     }
   };
 
