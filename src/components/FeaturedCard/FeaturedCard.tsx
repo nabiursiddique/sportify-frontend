@@ -35,7 +35,7 @@ const FeaturedCard = ({ product }: { product: TProduct }) => {
       </CardContent>
       <CardFooter className="p-4 border-t border-gray-700">
         <Link className="w-full" to={`/product-details/${product?._id}`}>
-          <Button className="w-full bg-lime-500 hover:bg-lime-600 hover:scale-95 transition-all">
+          <Button className="w-full" variant={"custom"}>
             View Details
           </Button>
         </Link>

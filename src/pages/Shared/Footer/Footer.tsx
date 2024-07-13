@@ -1,3 +1,5 @@
+import { Button } from "@/components/ui/button";
+
 const Footer = () => {
   return (
     <footer className="bg-white">
@@ -38,9 +40,7 @@ const Footer = () => {
                     className="w-full border border-lime-500 focus:border-transparent focus:ring-transparent sm:text-sm p-2"
                   />
 
-                  <button className="mt-1 w-full rounded bg-lime-500 px-6 py-3 text-sm font-bold uppercase tracking-wide text-white transition-none hover:bg-teal-600 sm:mt-0 sm:w-auto sm:shrink-0">
-                    Send
-                  </button>
+                  <Button variant={"custom"}>Send</Button>
                 </div>
               </form>
             </div>

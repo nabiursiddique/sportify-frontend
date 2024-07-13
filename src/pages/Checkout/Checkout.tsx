@@ -111,7 +111,8 @@ const Checkout = () => {
             <div className="flex justify-center">
               <Button
                 size="lg"
-                className="w-full hover:scale-95 transition-all bg-lime-500 hover:bg-lime-600"
+                className="w-full"
+                variant={"custom"}
                 disabled={total === 0}
               >
                 Submit

@@ -140,7 +140,8 @@ const AddProduct = () => {
 
             <Button
               type="submit"
-              className="px-4 py-2 w-full bg-lime-400 text-white  rounded-md hover:scale-95 transition-all mt-10 hover:bg-lime-600"
+              className="px-4 py-2  mt-10 w-full"
+              variant={"custom"}
             >
               Submit
             </Button>
