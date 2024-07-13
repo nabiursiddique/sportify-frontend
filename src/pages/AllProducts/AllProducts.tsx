@@ -5,6 +5,7 @@ import { useGetAllProductsQuery } from "@/redux/api/baseApi";
 import { TProduct } from "@/types";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
+import FilterButton from "./FilterButton";
 
 const AllProducts = () => {
   const [search, setSearch] = useState("");
@@ -24,7 +25,11 @@ const AllProducts = () => {
       </h1>
       <hr />
       {/* Search products bar */}
-      <form className="flex lg:justify-end justify-center lg:mr-6">
+      <form className="flex lg:justify-end justify-center items-center lg:mr-6 gap-5">
+        {/* filter button */}
+        <div>
+          <FilterButton />
+        </div>
         <div className="form-control w-full max-w-xs mt-2">
           <Input
             className="border border-lime-500"
