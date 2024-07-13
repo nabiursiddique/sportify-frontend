@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import { useUpdateStockQuantityMutation } from "@/redux/api/baseApi";
 import {
   decreaseProductQuantityInCart,
   increaseProductQuantityInCart,
@@ -58,11 +59,19 @@ const Checkout = () => {
     (product) => product.quantity > product.stockQuantity
   );
 
+  // reducing products quantity after checkout
+  const [updateStockQuantity] = useUpdateStockQuantityMutation();
+
   const handleSubmit = (e: { preventDefault: () => void }) => {
     e.preventDefault();
     if (isOutOfStock) {
       toast.warning("Some items in your cart are out of stock.");
     } else {
+      //* updating stock quantity after checkout
+      const productIds = cart.map((product) => product.id);
+      const stockQuantity = cart.map((product) => product.quantity);
+      updateStockQuantity({ productIds, stockQuantity });
+
       toast.success("Thanks For Ordering");
       dispatch(removeAllProductsFromCart());
     }
