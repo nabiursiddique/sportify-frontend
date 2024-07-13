@@ -21,7 +21,7 @@ const SideNavbar = () => {
       variant: "default",
     },
     {
-      title: "Edit Product",
+      title: "Manage Products",
       to: "/manage-products/edit-product",
       icon: PlusCircle,
       variant: "default",

@@ -1,11 +1,25 @@
 import { Link } from "react-router-dom";
-import sliderImage from "@/assets/Carousel_image-01.jpg";
+import cricket from "@/assets/cricket.jpg";
+import football from "@/assets/Football.jpg";
+import badminton from "@/assets/Badminton.jpg";
 
 const Categories = () => {
   const categories = [
-    { name: "Cricket", path: "/all-products?category=cricket" },
-    { name: "Badminton", path: "/all-products?category=badminton" },
-    { name: "Football", path: "/all-products?category=football" },
+    {
+      name: "Cricket",
+      path: "/all-products?category=cricket",
+      bgImage: `url(${cricket})`,
+    },
+    {
+      name: "Football",
+      path: "/all-products?category=football",
+      bgImage: `url(${football})`,
+    },
+    {
+      name: "Badminton",
+      path: "/all-products?category=badminton",
+      bgImage: `url(${badminton})`,
+    },
   ];
   return (
     <div>
@@ -18,7 +32,7 @@ const Categories = () => {
           <Link key={ind} to={`${category.path}`}>
             <div
               className="relative rounded-sm  h-[200px] bg-cover bg-center shadow-md shadow-neutral-600 hover:scale-105 transition-all"
-              style={{ backgroundImage: `url(${sliderImage})` }}
+              style={{ backgroundImage: category?.bgImage }}
             >
               <div className="absolute inset-0 bg-black opacity-30"></div>
               <div className="flex items-center translate-x-1/3 h-full z-20 absolute">

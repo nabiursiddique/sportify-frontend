@@ -245,6 +245,7 @@ const Checkout = () => {
                             id="cashOnDelivery"
                             name="cashOnDelivery"
                             value="paymentMethod"
+                            required
                           />
                           <label className="mx-2">Cash On Delivery</label>
                         </div>
