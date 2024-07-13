@@ -4,10 +4,15 @@ import { Input } from "@/components/ui/input";
 import { useGetAllProductsQuery } from "@/redux/api/baseApi";
 import { TProduct } from "@/types";
 import { useState } from "react";
+import { useLocation } from "react-router-dom";
 
 const AllProducts = () => {
   const [search, setSearch] = useState("");
-  const { data: products, isLoading } = useGetAllProductsQuery({});
+  const location = useLocation();
+  const queryParams = new URLSearchParams(location.search);
+  const category = queryParams.get("category");
+
+  const { data: products, isLoading } = useGetAllProductsQuery({ category });
   if (isLoading) {
     return <Spinner />;
   }

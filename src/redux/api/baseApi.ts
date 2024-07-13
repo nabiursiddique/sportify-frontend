@@ -19,10 +19,20 @@ export const baseApi = createApi({
     }),
     //* Get all products
     getAllProducts: builder.query({
-      query: () => ({
-        method: "GET",
-        url: "/product",
-      }),
+      query: ({ category }) => {
+        let url = "/product";
+        const params = new URLSearchParams();
+        if (category) {
+          params.append("category", category);
+        }
+        if (params.toString()) {
+          url += `?${params.toString()}`;
+        }
+        return {
+          method: "GET",
+          url,
+        };
+      },
       providesTags: ["Product"],
     }),
     //* Get single product
