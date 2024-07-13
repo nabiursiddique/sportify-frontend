@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 import Rating from "react-rating";
 import { toast } from "sonner";
 
-const ManageProducts = () => {
+const AddProduct = () => {
   const [ratingValue, setRatingValue] = useState(0);
 
   const [createProduct, { isLoading, isSuccess }] = useCreateProductMutation();
@@ -151,4 +151,4 @@ const ManageProducts = () => {
   );
 };
 
-export default ManageProducts;
+export default AddProduct;

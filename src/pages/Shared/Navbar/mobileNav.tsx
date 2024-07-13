@@ -31,7 +31,7 @@ export default function MobileNav() {
               All Products
             </Button>
           </NavLink>
-          <NavLink to={"/manage-products"}>
+          <NavLink to={"/manage-products/add-product"}>
             <Button variant="link" className="hover:text-lime-500">
               Manage Products
             </Button>

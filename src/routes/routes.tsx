@@ -1,10 +1,12 @@
 import MainLayout from "@/components/layout/MainLayout";
+import ManageProductLayout from "@/components/layout/ManageProductLayout";
 import AboutUs from "@/pages/AboutUs/AboutUs";
 import AllProducts from "@/pages/AllProducts/AllProducts";
 import Cart from "@/pages/Cart/Cart";
 import Checkout from "@/pages/Checkout/Checkout";
 import Home from "@/pages/Home/Home";
-import ManageProducts from "@/pages/ManageProducts/ManageProducts";
+import AddProduct from "@/pages/ManageProducts/AddProduct";
+import EditProducts from "@/pages/ManageProducts/EditProducts";
 import SingleProduct from "@/pages/SingleProduct/SingleProduct";
 import { createBrowserRouter } from "react-router-dom";
 
@@ -26,10 +28,6 @@ const router = createBrowserRouter([
         element: <AllProducts />,
       },
       {
-        path: "/manage-products",
-        element: <ManageProducts />,
-      },
-      {
         path: "/product-details/:id",
         element: <SingleProduct />,
       },
@@ -40,6 +38,20 @@ const router = createBrowserRouter([
       {
         path: "/checkout",
         element: <Checkout />,
+      },
+    ],
+  },
+  {
+    path: "/manage-products",
+    element: <ManageProductLayout />,
+    children: [
+      {
+        path: "/manage-products/add-product",
+        element: <AddProduct />,
+      },
+      {
+        path: "/manage-products/edit-product",
+        element: <EditProducts />,
       },
     ],
   },
