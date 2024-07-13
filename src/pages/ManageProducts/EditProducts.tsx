@@ -1,3 +1,4 @@
+import Spinner from "@/components/Spinner/Spinner";
 import { Button } from "@/components/ui/button";
 import { CardHeader } from "@/components/ui/card";
 import {
@@ -9,18 +10,29 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import {
+  useDeleteProductMutation,
+  useGetAllProductsQuery,
+} from "@/redux/api/baseApi";
+import { TProduct } from "@/types";
+import { toast } from "sonner";
 
 const EditProducts = () => {
-  const data = [
-    {
-      id: 1,
-      name: "iphone",
-      stock: 10,
-      price: 1000,
-      category: "electronics",
-      quantity: 1,
-    },
-  ];
+  const { data: products, isLoading } = useGetAllProductsQuery({});
+  const [deleteProduct, { isSuccess, isError }] = useDeleteProductMutation();
+
+  if (isSuccess) {
+    toast.success("Product Deleted Successfully");
+  }
+
+  if (isError) {
+    toast.error("Product Delete Unsuccessful");
+  }
+
+  if (isLoading) {
+    return <Spinner />;
+  }
+
   return (
     <div>
       <div className="p-10">
@@ -40,25 +52,19 @@ const EditProducts = () => {
             </TableRow>
           </TableHeader>
           <TableBody>
-            {data
-              ? data.map((product) => (
-                  <TableRow key={product.id}>
-                    <TableCell>{product.name}</TableCell>
+            {products
+              ? products.data.map((product: TProduct) => (
+                  <TableRow key={product._id}>
+                    <TableCell className="font-bold">{product.name}</TableCell>
                     <TableCell className="">
-                      <Button
-                        variant="secondary"
-                        color="primary"
-                        className="mt-2"
-                      >
+                      <Button variant="custom" color="primary" className="mt-2">
                         Update Data
                       </Button>
                     </TableCell>
                     <TableCell className="">
                       <Button
-                        variant="secondary"
-                        color="secondary"
-                        className="mt-2 ml-2"
-                        // onClick={() => handelDelete(pet._id) }
+                        onClick={() => deleteProduct(product._id)}
+                        className="bg-red-500 hover:bg-red-600 hover:scale-95 transition-all"
                       >
                         Delete
                       </Button>
