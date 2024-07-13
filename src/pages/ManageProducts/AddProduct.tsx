@@ -19,7 +19,7 @@ const AddProduct = () => {
 
     const formData = {
       name: name.value,
-      category: category.value,
+      category: category.value.toLowerCase(),
       stockQuantity: stockQuantity.value,
       brand: brand.value,
       image: image.value,
