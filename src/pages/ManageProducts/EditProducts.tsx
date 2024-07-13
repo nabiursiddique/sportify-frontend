@@ -15,6 +15,7 @@ import {
   useGetAllProductsQuery,
 } from "@/redux/api/baseApi";
 import { TProduct } from "@/types";
+import { Link } from "react-router-dom";
 import { toast } from "sonner";
 
 const EditProducts = () => {
@@ -57,9 +58,17 @@ const EditProducts = () => {
                   <TableRow key={product._id}>
                     <TableCell className="font-bold">{product.name}</TableCell>
                     <TableCell className="">
-                      <Button variant="custom" color="primary" className="mt-2">
-                        Update Data
-                      </Button>
+                      <Link
+                        to={`/manage-products/edit-product-info/${product._id}`}
+                      >
+                        <Button
+                          variant="custom"
+                          color="primary"
+                          className="mt-2"
+                        >
+                          Update Data
+                        </Button>
+                      </Link>
                     </TableCell>
                     <TableCell className="">
                       <Button

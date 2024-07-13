@@ -6,6 +6,7 @@ import Cart from "@/pages/Cart/Cart";
 import Checkout from "@/pages/Checkout/Checkout";
 import Home from "@/pages/Home/Home";
 import AddProduct from "@/pages/ManageProducts/AddProduct";
+import EditProductInfo from "@/pages/ManageProducts/EditProductInfo";
 import EditProducts from "@/pages/ManageProducts/EditProducts";
 import SingleProduct from "@/pages/SingleProduct/SingleProduct";
 import { createBrowserRouter } from "react-router-dom";
@@ -52,6 +53,10 @@ const router = createBrowserRouter([
       {
         path: "/manage-products/edit-product",
         element: <EditProducts />,
+      },
+      {
+        path: "/manage-products/edit-product-info/:id",
+        element: <EditProductInfo />,
       },
     ],
   },
