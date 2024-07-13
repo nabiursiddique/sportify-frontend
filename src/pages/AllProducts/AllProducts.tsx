@@ -1,19 +1,35 @@
 import FeaturedCard from "@/components/FeaturedCard/FeaturedCard";
 import Spinner from "@/components/Spinner/Spinner";
+import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import {
+  Sheet,
+  SheetClose,
+  SheetContent,
+  SheetFooter,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+} from "@/components/ui/sheet";
 import { useGetAllProductsQuery } from "@/redux/api/baseApi";
 import { TProduct } from "@/types";
+import { Filter } from "lucide-react";
 import { useState } from "react";
 import { useLocation } from "react-router-dom";
-import FilterButton from "./FilterButton";
 
 const AllProducts = () => {
   const [search, setSearch] = useState("");
   const location = useLocation();
   const queryParams = new URLSearchParams(location.search);
-  const category = queryParams.get("category");
+  const [category, setCategory] = useState(queryParams.get("category") || "");
 
   const { data: products, isLoading } = useGetAllProductsQuery({ category });
+
+  // handling category filter
+  const handleCategory = (category: string) => {
+    setCategory(category);
+  };
+
   if (isLoading) {
     return <Spinner />;
   }
@@ -28,7 +44,54 @@ const AllProducts = () => {
       <form className="flex lg:justify-end justify-center items-center lg:mr-6 gap-5">
         {/* filter button */}
         <div>
-          <FilterButton />
+          <Sheet>
+            <SheetTrigger asChild>
+              <Button variant="custom">
+                <Filter />
+              </Button>
+            </SheetTrigger>
+
+            <SheetContent>
+              <SheetHeader>
+                <SheetTitle className="text-lime-500 font-extrabold text-2xl">
+                  Filter Products
+                </SheetTitle>
+                <div className=" my-5">
+                  <h1 className="text-xl font-bold text-lime-500 my-1">
+                    Category
+                  </h1>
+                  <div className="flex justify-around">
+                    <button
+                      onClick={() => handleCategory("cricket")}
+                      className="text-black mt-2  font-semibold text-sm border outline-1 p-2 px-4 "
+                    >
+                      Cricket
+                    </button>
+                    <button
+                      onClick={() => handleCategory("football")}
+                      className="text-black mt-2  font-semibold text-sm border outline-1 p-2 px-4 "
+                    >
+                      Football
+                    </button>
+                    <button
+                      onClick={() => handleCategory("badminton")}
+                      className="text-black mt-2  font-semibold text-sm border outline-1 p-2 px-4 "
+                    >
+                      Badminton
+                    </button>
+                  </div>
+                </div>
+              </SheetHeader>
+
+              <SheetFooter>
+                <SheetClose asChild>
+                  <Button type="submit" variant={"custom"} className="mt-5">
+                    Clear Filter
+                  </Button>
+                </SheetClose>
+              </SheetFooter>
+            </SheetContent>
+          </Sheet>
         </div>
         <div className="form-control w-full max-w-xs mt-2">
           <Input
